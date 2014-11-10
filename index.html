@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Translate Map</title>
+  <link rel="stylesheet" href="jquery-jvectormap-2.0.1.css" type="text/css" media="screen"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="jquery-jvectormap-2.0.1.min.js"></script>
+  <script src="jquery-jvectormap-europe-mill-en.js"></script>
+</head>
+<body>
+  <div id="world-map" style="width: 100%; height: 900px"></div>
+  <script>
+    //from http://msdn.microsoft.com/en-us/library/hh456380.aspx (Feb 2014)
+    var bingLanguageNames = {
+      'ar': 'Arabic',
+      'bg': 'Bulgarian',
+      'ca': 'Catalan',
+      'zh-CHS': 'Chinese Simplified',
+      'zh-CHT': 'Chinese Traditional',
+      'cs': 'Czech',
+      'da': 'Danish',
+      'nl': 'Dutch',
+      'en': 'English',
+      'et': 'Estonian',
+      'fi': 'Finnish',
+      'fr': 'French',
+      'de': 'German',
+      'el': 'Greek',
+      'ht': 'Haitian Creole',
+      'he': 'Hebrew',
+      'hi': 'Hindi',
+      'mww': 'Hmong Daw',
+      'hu': 'Hungarian',
+      'id': 'Indonesian',
+      'it': 'Italian',
+      'ja': 'Japanese',
+      'tlh': 'Klingon',
+      'tlh-Qaak': 'Klingon (pIqaD)',
+      'ko': 'Korean',
+      'lv': 'Latvian',
+      'lt': 'Lithuanian',
+      'ms': 'Malay',
+      'mt': 'Maltese',
+      'no': 'Norwegian',
+      'fa': 'Persian',
+      'pl': 'Polish',
+      'pt': 'Portuguese',
+      'ro': 'Romanian',
+      'ru': 'Russian',
+      'sk': 'Slovak',
+      'sl': 'Slovenian',
+      'es': 'Spanish',
+      'sv': 'Swedish',
+      'th': 'Thai',
+      'tr': 'Turkish',
+      'uk': 'Ukrainian',
+      'ur': 'Urdu',
+      'vi': 'Vietnamese',
+      'cy': 'Welsh'
+    }
+
+  var countryLanguages = {
+    'gb': 'en',
+    'de': 'de',
+    'fr': 'fr'
+  }
+
+  var hide = ['FO','AX','MT','AD','JE','GG','IM','LI','LU','IE','SM','AX'];
+  var supported = ['AR','BG']
+
+    var mapParams = {
+      map: 'europe_mill_en',
+      labels: {
+        regions: {
+          render: function(code){
+            return code
+            if ( supported.indexOf(code) > -1 ) return code
+          },
+          offsets: function(code){
+            return {
+              'RU': [50,0],
+              'NO': [-30,75],
+              'FI': [0,50],
+              'SE': [25,-85],
+              'EE': [10,0],
+              'ES': [25,-80],
+              'DK': [-32,0]
+            }[code];
+          }
+        }
+      },
+      onRegionTipShow: function(event, label, code){
+        label.html(label.html()+'<br>(' + bingLanguageNames[code.toLowerCase()] + ')');
+      }
+    }
+
+    $(document).ready(function(){
+      $('#world-map').vectorMap(mapParams);
+    });
+  </script>
+</body>
+</html>
