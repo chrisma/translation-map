@@ -12,13 +12,38 @@
   <script>
 
     //https://cloud.google.com/translate/v2/using_rest#language-params
-    var countryLanguages = {
-      'gb': 'en', //Great Britain
-      'de': 'de', //Germany
-      'fr': 'fr', //France
-      'pl': 'pl', //Poland
-      'dk': 'da', //Denmark
-      'no': 'no', //Norway
+    var languageData = {
+      'en': {countries:['gb'], name:'English'},
+      'de': {countries:['de', 'at'], name:'German'},
+      'fr': {countries:['fr'], name:'French'},
+      'nl': {countries:['nl'], name:'Dutch'},
+      'da': {countries:['dk'], name:'Danish'},
+      'pl': {countries:['pl'], name:'Polish'},
+      'cs': {countries:['cz'], name:'Czech'},
+      'es': {countries:['es'], name:'Spanish'},
+      'pt': {countries:['pt'], name:'Portuguese'},
+      'it': {countries:['it'], name:'Italian'},
+      'no': {countries:['no'], name:'Norwegian'},
+      'sv': {countries:['se'], name:'Swedish'},
+      'fi': {countries:['fi'], name:'Finnish'},
+      'et': {countries:['ee'], name:'Estonia'},
+      'lv': {countries:['lv'], name:'Latvian'},
+      'lt': {countries:['lt'], name:'Lithuanian'},
+      'be': {countries:['by'], name:'Belarusian'},
+      'uk': {countries:['ua'], name:'Ukrainian'},
+      'sk': {countries:['sk'], name:'Slovak'},
+      'hu': {countries:['hu'], name:'Hungarian'},
+      'ro': {countries:['ro','md'], name:'Romanian'},
+      'bg': {countries:['bg'], name:'Bulgarian'},
+      'el': {countries:['gr'], name:'Greek'},
+      'sl': {countries:['si'], name:'Slovenian'},
+      'hr': {countries:['hr'], name:'Croatian'},
+      'sr': {countries:['rs'], name:'Serbian'},
+      'sq': {countries:['al'], name:'Albanian'},
+      'mk': {countries:['mk'], name:'Macedonian'},
+      'tr': {countries:['tr'], name:'Turkish'},
+      'ru': {countries:['ru'], name:'Russian'},
+      'is': {countries:['is'], name:'Icelandic'}
     }
 
     var hide = ['FO','AX','MT','AD','JE','GG','IM','LI','LU','IE','SM','AX'];
@@ -39,7 +64,20 @@
               'SE': [25,-85],
               'EE': [10,0],
               'ES': [25,-80],
-              'DK': [-32,0]
+              'DK': [-32,0],
+              'IT': [0,-10],
+              'LV': [3,-4],
+              'AT': [15,0],
+              'DE': [0,-10],
+              'UA': [0,-20],
+              'MD': [0,-10],
+              'BG': [-5,0],
+              'GR': [-30,-13],
+              'HR': [5,-18],
+              'SI': [-1,-1],
+              'PT': [-4,0],
+              'FR': [0,-10],
+              'AL': [-4,5]
             }[code];
           }
         }
