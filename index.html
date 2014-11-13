@@ -102,7 +102,7 @@
       for (var key in countries) {
         countryCode = countries[key];
         var label = $('text').filter('[data-code="' + countryCode.toUpperCase() + '"]');
-        label.text(translation);
+        label.html(translation);
       }
     }
 
@@ -111,8 +111,12 @@
 
       var word = "house";
 
+      var i = 0;
       for (var languageCode in languageData) {
-        googleTranslate(word, 'en', languageCode, showTranslation);
+        showTranslation(languageCode, '&hellip;');
+        //Stagger calls to the translation API
+        setTimeout(googleTranslate, 200*i, word, 'en', languageCode, showTranslation); 
+        i+=1;
       }
 
     });
