@@ -46,44 +46,51 @@
       'is': {countries:['is'], name:'Icelandic'}
     }
 
-    var hide = ['FO','AX','MT','AD','JE','GG','IM','LI','LU','IE','SM','AX'];
-    var supported = ['AR','BG']
+    var offsets = {
+      'RU': [50,0],
+      'NO': [-30,75],
+      'FI': [0,50],
+      'SE': [25,-85],
+      'EE': [10,0],
+      'ES': [-15,-20],
+      'DK': [-32,0],
+      'IT': [0,-10],
+      'LV': [3,-4],
+      'AT': [15,0],
+      'DE': [0,-10],
+      'UA': [0,-20],
+      'MD': [0,-10],
+      'BG': [-5,0],
+      'GR': [-30,-13],
+      'HR': [5,-18],
+      'SI': [-1,-1],
+      'PT': [-4,0],
+      'FR': [0,-10],
+      'AL': [-4,5]
+    }
+
+    function languageName(countryCode) {
+      for (var key in languageData) {
+        var obj = languageData[key];
+        if ( obj.countries.indexOf(countryCode) > -1 ) return obj.name
+      }
+    }
 
     var mapParams = {
       map: 'europe_mill_en',
       labels: {
         regions: {
           render: function(code){
-            return countryLanguages[code.toLowerCase()] || code
+            return code
           },
           offsets: function(code){
-            return {
-              'RU': [50,0],
-              'NO': [-30,75],
-              'FI': [0,50],
-              'SE': [25,-85],
-              'EE': [10,0],
-              'ES': [25,-80],
-              'DK': [-32,0],
-              'IT': [0,-10],
-              'LV': [3,-4],
-              'AT': [15,0],
-              'DE': [0,-10],
-              'UA': [0,-20],
-              'MD': [0,-10],
-              'BG': [-5,0],
-              'GR': [-30,-13],
-              'HR': [5,-18],
-              'SI': [-1,-1],
-              'PT': [-4,0],
-              'FR': [0,-10],
-              'AL': [-4,5]
-            }[code];
+            return offsets[code];
           }
         }
       },
       onRegionTipShow: function(event, label, code){
-        label.html(label.html()+'<br>(' + 'language' + ')');
+        var name = languageName(code.toLowerCase());
+        if ( name ) label.html(label.html()+'<br>(' + name + ')');
       }
     }
 
