@@ -14,18 +14,18 @@
     //https://cloud.google.com/translate/v2/using_rest#language-params
     var languageData = {
       'en': {countries:['gb'], name:'English'},
-      'de': {countries:['de', 'at'], name:'German'},
-      'fr': {countries:['fr'], name:'French'},
-      'nl': {countries:['nl'], name:'Dutch'},
+      // 'de': {countries:['de', 'at'], name:'German'},
+      // 'fr': {countries:['fr'], name:'French'},
+      // 'nl': {countries:['nl'], name:'Dutch'},
       // 'da': {countries:['dk'], name:'Danish'},
       // 'pl': {countries:['pl'], name:'Polish'},
       // 'cs': {countries:['cz'], name:'Czech'},
       // 'es': {countries:['es'], name:'Spanish'},
       // 'pt': {countries:['pt'], name:'Portuguese'},
       // 'it': {countries:['it'], name:'Italian'},
-      'no': {countries:['no'], name:'Norwegian'},
-      'sv': {countries:['se'], name:'Swedish'},
-      'fi': {countries:['fi'], name:'Finnish'},
+      // 'no': {countries:['no'], name:'Norwegian'},
+      // 'sv': {countries:['se'], name:'Swedish'},
+      // 'fi': {countries:['fi'], name:'Finnish'},
       // 'et': {countries:['ee'], name:'Estonia'},
       // 'lv': {countries:['lv'], name:'Latvian'},
       // 'lt': {countries:['lt'], name:'Lithuanian'},
@@ -77,6 +77,7 @@
     }
 
     var mapParams = {
+      container: $('#map'),
       map: 'europe_mill_en',
       labels: {
         regions: {
@@ -90,6 +91,7 @@
           }
         }
       },
+      zoomMax: 5,
       onRegionTipShow: function(event, tooltip, code){
         var name = languageName(code.toLowerCase());
         if ( name ) tooltip.html(tooltip.html()+'<br>(' + name + ')');
@@ -107,8 +109,9 @@
       }
     }
 
+    var map;
     $(document).ready(function(){
-      $('#map').vectorMap(mapParams);
+      map = new jvm.Map(mapParams);
 
       // var URLhash = location.hash.replace('#', '');
       // if ( URLhash ) run(URLhash);
