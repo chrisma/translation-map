@@ -19,7 +19,7 @@
 
 .jvectormap-zoomin, .jvectormap-zoomout, .jvectormap-goback {
     position: absolute;
-    left: 10px;
+    left: 20px;
     border-radius: 3px;
     background: #292929;
     padding: 3px;
@@ -30,16 +30,18 @@
 }
 
 .jvectormap-zoomin, .jvectormap-zoomout {
-    width: 10px;
-    height: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    line-height: 30px;
 }
 
 .jvectormap-zoomin {
-    top: 10px;
+    top: 20px;
 }
 
 .jvectormap-zoomout {
-    top: 30px;
+    top: 65px;
 }
 
 .jvectormap-goback {
