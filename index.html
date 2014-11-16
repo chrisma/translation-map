@@ -7,9 +7,12 @@
   <script src="jquery-jvectormap-2.0.1.min.js"></script>
   <script src="jquery-jvectormap-europe-mill-en.js"></script>
   <script src="google_translate.js"></script>
+  <style type="text/css">
+    * {margin:0;}
+  </style>
 </head>
 <body>
-  <div id="map" style="width: 100%; height: 700px"></div>
+  <div id="map" style="width:100%; height: 900px;"></div>
   <script>
     //https://cloud.google.com/translate/v2/using_rest#language-params
     var languageData = {
@@ -43,7 +46,6 @@
       // 'mk': {countries:['mk'], name:'Macedonian'},
       // 'tr': {countries:['tr'], name:'Turkish'},
       // 'ru': {countries:['ru'], name:'Russian'},
-      // 'is': {countries:['is'], name:'Icelandic'}
     }
 
     function languageName(countryCode) {
@@ -91,7 +93,6 @@
           }
         }
       },
-      zoomMax: 5,
       onRegionTipShow: function(event, tooltip, code){
         var name = languageName(code.toLowerCase());
         if ( name ) tooltip.html(tooltip.html()+'<br>(' + name + ')');
@@ -111,7 +112,15 @@
 
     var map;
     $(document).ready(function(){
+      function adaptToWindow() {
+        $('#map').height($(window).height());
+        map.updateSize();
+      }
+
       map = new jvm.Map(mapParams);
+
+      adaptToWindow();
+      $(window).resize(adaptToWindow);
 
       // var URLhash = location.hash.replace('#', '');
       // if ( URLhash ) run(URLhash);
