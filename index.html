@@ -9,49 +9,55 @@
   <script src="google_translate.js"></script>
 </head>
 <body>
-  <div id="world-map" style="width: 100%; height: 700px"></div>
+  <div id="map" style="width: 100%; height: 700px"></div>
   <script>
-
     //https://cloud.google.com/translate/v2/using_rest#language-params
     var languageData = {
       'en': {countries:['gb'], name:'English'},
       'de': {countries:['de', 'at'], name:'German'},
       'fr': {countries:['fr'], name:'French'},
       'nl': {countries:['nl'], name:'Dutch'},
-      'da': {countries:['dk'], name:'Danish'},
-      'pl': {countries:['pl'], name:'Polish'},
-      'cs': {countries:['cz'], name:'Czech'},
-      'es': {countries:['es'], name:'Spanish'},
-      'pt': {countries:['pt'], name:'Portuguese'},
-      'it': {countries:['it'], name:'Italian'},
+      // 'da': {countries:['dk'], name:'Danish'},
+      // 'pl': {countries:['pl'], name:'Polish'},
+      // 'cs': {countries:['cz'], name:'Czech'},
+      // 'es': {countries:['es'], name:'Spanish'},
+      // 'pt': {countries:['pt'], name:'Portuguese'},
+      // 'it': {countries:['it'], name:'Italian'},
       'no': {countries:['no'], name:'Norwegian'},
       'sv': {countries:['se'], name:'Swedish'},
       'fi': {countries:['fi'], name:'Finnish'},
-      'et': {countries:['ee'], name:'Estonia'},
-      'lv': {countries:['lv'], name:'Latvian'},
-      'lt': {countries:['lt'], name:'Lithuanian'},
-      'be': {countries:['by'], name:'Belarusian'},
-      'uk': {countries:['ua'], name:'Ukrainian'},
-      'sk': {countries:['sk'], name:'Slovak'},
-      'hu': {countries:['hu'], name:'Hungarian'},
-      'ro': {countries:['ro','md'], name:'Romanian'},
-      'bg': {countries:['bg'], name:'Bulgarian'},
-      'el': {countries:['gr'], name:'Greek'},
-      'sl': {countries:['si'], name:'Slovenian'},
-      'hr': {countries:['hr'], name:'Croatian'},
-      'sr': {countries:['rs'], name:'Serbian'},
-      'sq': {countries:['al'], name:'Albanian'},
-      'mk': {countries:['mk'], name:'Macedonian'},
-      'tr': {countries:['tr'], name:'Turkish'},
-      'ru': {countries:['ru'], name:'Russian'},
-      'is': {countries:['is'], name:'Icelandic'}
+      // 'et': {countries:['ee'], name:'Estonia'},
+      // 'lv': {countries:['lv'], name:'Latvian'},
+      // 'lt': {countries:['lt'], name:'Lithuanian'},
+      // 'be': {countries:['by'], name:'Belarusian'},
+      // 'uk': {countries:['ua'], name:'Ukrainian'},
+      // 'sk': {countries:['sk'], name:'Slovak'},
+      // 'hu': {countries:['hu'], name:'Hungarian'},
+      // 'ro': {countries:['ro','md'], name:'Romanian'},
+      // 'bg': {countries:['bg'], name:'Bulgarian'},
+      // 'el': {countries:['gr'], name:'Greek'},
+      // 'sl': {countries:['si'], name:'Slovenian'},
+      // 'hr': {countries:['hr'], name:'Croatian'},
+      // 'sr': {countries:['rs'], name:'Serbian'},
+      // 'sq': {countries:['al'], name:'Albanian'},
+      // 'mk': {countries:['mk'], name:'Macedonian'},
+      // 'tr': {countries:['tr'], name:'Turkish'},
+      // 'ru': {countries:['ru'], name:'Russian'},
+      // 'is': {countries:['is'], name:'Icelandic'}
+    }
+
+    function languageName(countryCode) {
+      for (var key in languageData) {
+        var obj = languageData[key];
+        if ( obj.countries.indexOf(countryCode) > -1 ) return obj.name
+      }
     }
 
     var offsets = {
       'RU': [50,0],
       'NO': [-30,75],
       'FI': [0,50],
-      'SE': [25,-85],
+      'SE': [-40,60],
       'EE': [10,0],
       'ES': [-15,-20],
       'DK': [-32,0],
@@ -68,13 +74,6 @@
       'PT': [-4,0],
       'FR': [0,-10],
       'AL': [-4,5]
-    }
-
-    function languageName(countryCode) {
-      for (var key in languageData) {
-        var obj = languageData[key];
-        if ( obj.countries.indexOf(countryCode) > -1 ) return obj.name
-      }
     }
 
     var mapParams = {
@@ -97,28 +96,37 @@
       }
     }
 
-    function showTranslation(languageCode, translation) {
-      var countries = languageData[languageCode].countries;
+    function showTranslation(toCode, data) {
+      var countries = languageData[toCode].countries;
       for (var key in countries) {
-        countryCode = countries[key];
+        var countryCode = countries[key];
         var label = $('text').filter('[data-code="' + countryCode.toUpperCase() + '"]');
-        label.html(translation);
+        var text = data.translation;
+        // if ( data.transliteration ) text += (' [' + data.transliteration + ']');
+        label.text(text);
       }
     }
 
     $(document).ready(function(){
-      $('#world-map').vectorMap(mapParams);
+      $('#map').vectorMap(mapParams);
+
+      // var URLhash = location.hash.replace('#', '');
+      // if ( URLhash ) run(URLhash);
+      // var ArtistAndSong = URLhash || randomPropertyName(cache);
+
+      // $(window).on('hashchange',function(){
+      //   window.location.reload();
+      // });
 
       var word = "house";
 
-      var i = 0;
       for (var languageCode in languageData) {
-        showTranslation(languageCode, '&hellip;');
-        //Stagger calls to the translation API
-        setTimeout(googleTranslate, 200*i, word, 'en', languageCode, showTranslation); 
-        i+=1;
+        showTranslation(languageCode, {translation:'...'});
+        var result = googleTranslate(word, 'en', languageCode);
+        //Curry, fix the first parameter
+        result.done(showTranslation.bind(null, languageCode));  
+        result.fail(function(){console.log('FAIL');})
       }
-
     });
   </script>
 </body>
