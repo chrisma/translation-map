@@ -11,10 +11,23 @@
     * {
       margin: 0;
     }
+    input[type="text"] {
+      position:absolute;
+      top: 45px;
+      left: 80px;
+      font-size: 16px;
+      box-shadow: 1px 2px 2px 1px #303030;
+      padding: 5px;
+      border: none;
+    }
+    input[type="text"]:focus {
+      outline: 0; /*diable blue outline on focus*/
+    }
   </style>
 </head>
 <body>
   <div id="map" style="width:100%; height: 900px;"></div>
+  <input type="text" autofocus placeholder="Word to translate">
   <script>
     //https://cloud.google.com/translate/v2/using_rest#language-params
     var languageData = {
@@ -125,14 +138,27 @@
       }
     }
 
+    function run(text){
+      for (var languageCode in languageData) {
+        showTranslation(languageCode, {translation: '...'});
+        var result = googleTranslate(text, 'en', languageCode);
+        //Curry, fix the first parameter
+        result.done(showTranslation.bind(null, languageCode));
+        result.fail(function(jqXHR, textStatus, errorThrown){
+          console.log('ERROR:',textStatus, errorThrown);
+        });
+      }
+    }
+
     var map;
     $(document).ready(function(){
+      var $map = $('#map');
+      map = new jvm.Map(mapParams);
+
       function adaptToWindow() {
-        $('#map').height($(window).height());
+        $map.height($(window).height());
         map.updateSize();
       }
-
-      map = new jvm.Map(mapParams);
 
       adaptToWindow();
       $(window).resize(adaptToWindow);
@@ -146,14 +172,8 @@
       // });
 
       var word = "house";
+      run(word);
 
-      for (var languageCode in languageData) {
-        showTranslation(languageCode, {translation:'...'});
-        var result = googleTranslate(word, 'en', languageCode);
-        //Curry, fix the first parameter
-        result.done(showTranslation.bind(null, languageCode));  
-        result.fail(function(){console.log('FAIL');})
-      }
     });
   </script>
 </body>

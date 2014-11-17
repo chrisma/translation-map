@@ -12,13 +12,13 @@ function googleTranslate(text, fromCode, toCode) {
     'and source="' + fromCode + '";' +
     '&format=json' +
     '&env=store://datatables.org/alltableswithkeys' +
-    '&_maxage=' + 60*60*24 //cache for a day
+    '&_maxage=' + 60*60*24*7 //cache for a week
 
   function filter(data, dataType) {
     var obj = $.parseJSON(data)
     try {
-      var translation = obj.query.results.json.sentences;
-      return {translation:translation.trans, transliteration:translation.translit};
+      var result = obj.query.results.json.sentences;
+      return {translation:result.trans, transliteration:result.translit};
     } catch (e) {
       return {translation:undefined, transliteration:undefined};
     }
