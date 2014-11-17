@@ -68,7 +68,7 @@
     <img id="loadergif" class="hidden" src="loader.gif">
     <div id="loader"></div>
   </div>
-  <footer>By <a href="https://twitter.com/chrisma0">@chrisma0</a> | Hosted on <a href="https://github.com/chrisma/translation-map">Github</a></footer>
+  <footer>By <a href="https://twitter.com/chrisma0">@chrisma0</a> | Hosted on <a href="https://github.com/chrisma/translation-map">Github</a><!-- | Download: <a href="javascript:;" id="download-svg">SVG</a> --></footer>
   <script>
     //https://cloud.google.com/translate/v2/using_rest#language-params
     var languageData = {
@@ -229,6 +229,13 @@
       );
     }
 
+    // function downloadSVG() {
+    //   $('.jvectormap-container > svg').attr({ version: '1.1' , xmlns:"http://www.w3.org/2000/svg"});
+    //   var svg = $(".jvectormap-container").html().trim();
+    //   var b64 = btoa(unescape(encodeURIComponent(svg)));
+    //   $(this).attr("href", "data:image/svg+xml;charset=utf-8;base64," + b64);
+    // }
+
     var map;
     $(document).ready(function(){
       //Setup
@@ -249,6 +256,8 @@
           run($(this).val());
         }
       });
+
+      // $("#download-svg").on("click", downloadSVG);
 
       $(window).on('hashchange',function(){
         var URLhash = location.hash.replace('#', '');
