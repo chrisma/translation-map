@@ -5,6 +5,7 @@ translation-map
 
 Visualizing European languages on a map.
 
-Uses http://jvectormap.com/
+Available at: http://chrisma.github.io/translation-map/
 
+Uses http://jvectormap.com/
 Inspired (in part) by these rage comics: http://knowyourmeme.com/memes/differenze-linguistiche
