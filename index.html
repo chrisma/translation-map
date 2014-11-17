@@ -27,7 +27,7 @@
 </head>
 <body>
   <div id="map" style="width:100%; height: 900px;"></div>
-  <input type="text" autofocus placeholder="Word to translate">
+  <input id="translation" type="text" autofocus placeholder="Word to translate">
   <script>
     //https://cloud.google.com/translate/v2/using_rest#language-params
     var languageData = {
@@ -173,6 +173,7 @@
 
     var map;
     $(document).ready(function(){
+      //Setup
       var $map = $('#map');
       map = new jvm.Map(mapParams);
 
@@ -180,12 +181,17 @@
         $map.height($(window).height());
         map.updateSize();
       }
-
       adaptToWindow();
       $(window).resize(adaptToWindow);
-
       //focusOn in the mapParams behaves differently
       map.setFocus({scale:1.3, x:0.5, y:0.7, animate:false})
+
+      $("#translation").keyup(function(event){
+        if(event.which == 13){ //Enter
+          run($(this).val());
+        }
+      });
+
 
       // var URLhash = location.hash.replace('#', '');
       // if ( URLhash ) run(URLhash);
