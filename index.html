@@ -21,6 +21,7 @@
       box-shadow: 1px 2px 2px 1px #303030;
       padding: 5px;
       border: none;
+      width: 191px;
     }
     input[type="text"]:focus {
       outline: 0; /*diable blue outline on focus*/
@@ -38,15 +39,36 @@
     .hidden {
       display: none;
     }
+    div#examples {
+      top: 59px;
+      left: 80px;
+      position: absolute;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    a:link {
+      color: #333333;
+    }
+    a:visited {
+      color: #333333;
+    }
+    footer {
+      position: absolute;
+      left: 5px;
+      bottom: 5px;
+      font-size: 15px;
+    }
   </style>
 </head>
 <body>
   <div id="map" style="width:100%; height: 900px;"></div>
   <input id="translation" type="text" autofocus placeholder="Word to translate">
+  <div id="examples">Examples: <a href="#cinema">cinema</a>, <a href="#butterfly">butterfly</a>, <a href="#tv">tv</a></div>
   <div id="loader_container">
     <img id="loadergif" class="hidden" src="loader.gif">
     <div id="loader"></div>
   </div>
+  <footer>By <a href="https://twitter.com/chrisma0">@chrisma0</a> | Hosted on <a href="https://github.com/chrisma/translation-map">Github</a></footer>
   <script>
     //https://cloud.google.com/translate/v2/using_rest#language-params
     var languageData = {
@@ -112,7 +134,8 @@
       'AL': [-4,5],
       'GB': [23,60],
       'LT': [0,-5],
-      'SK': [0,-3]
+      'SK': [0,-3],
+      'NL': [0,-8]
     }
 
     var mapParams = {
@@ -197,7 +220,6 @@
       //$.when expects a list of parameters
       $.when.apply($, deferreds).always(
         function(){
-          var $loader = $('#loader');
           $('#loader').text('Done!')
           setTimeout(function(){
             $('#loader').text('');
@@ -228,17 +250,18 @@
         }
       });
 
+      $(window).on('hashchange',function(){
+        var URLhash = location.hash.replace('#', '');
+        $('#translation').val(URLhash);
+        run(URLhash);
+      });
 
-      // var URLhash = location.hash.replace('#', '');
-      // if ( URLhash ) run(URLhash);
-      // var ArtistAndSong = URLhash || randomPropertyName(cache);
-
-      // $(window).on('hashchange',function(){
-      //   window.location.reload();
-      // });
-
-      var word = "house";
-      run(word);
+      var URLhash = location.hash.replace('#', '');
+      var choices = ['butterfly', 'tv', 'computer', 'cinema', 'mosquito'];
+      var randomWord = choices[Math.floor(Math.random()*choices.length)];
+      var text = URLhash || randomWord;
+      $('#translation').val(text);
+      run(text);
 
     });
   </script>
