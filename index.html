@@ -221,9 +221,9 @@
       $.when.apply($, deferreds).always(
         function(){
           $('#loader').text('Done!')
+          $('#loadergif').hide();
           setTimeout(function(){
             $('#loader').text('');
-            $('#loadergif').hide();
           },300);
         }
       );
