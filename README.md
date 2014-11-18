@@ -10,7 +10,7 @@ Available at: [TranslationMap.cf](http://www.translationmap.cf)
 * [Canvg library](https://code.google.com/p/canvg/) for creating png's
 
 ## Inspiration
-Inspired (in part) by these "rage" comics (apparently termed [differenze linguistiche](http://knowyourmeme.com/memes/differenze-linguistiche)):
+Inspired (in part) by these "rage comics" (apparently termed [differenze linguistiche](http://knowyourmeme.com/memes/differenze-linguistiche)):
 
 
 <img src="http://i2.kym-cdn.com/photos/images/original/000/256/637/c13.jpg" align="left" width="250" >
