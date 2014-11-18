@@ -6,15 +6,15 @@
   <meta property="og:title" content="Translation Map"/>
   <meta property="og:site_name" content="Translation Map"/>
   <meta property="og:url" content="http://translationmap.cf"/>
-  <meta property="og:description" content="Visualize different European languages on a map."/>
+  <meta property="og:description" content="Visualize the differences and similarities of European languages on a map."/>
   <meta property="og:image" content="http://translationmap.cf/translation-map.png"/>
   <!-- END Facebook OpenGraph -->
   <!-- START Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:creator" content="@chrisma0">
   <meta name="twitter:title" content="Translation Map">
-  <meta name="twitter:description" content="Visualize different European languages on a map.">
-  <meta name="twitter:image:src" content="http://translationmap.cf/translation-map.png">
+  <meta name="twitter:description" content="Visualize the differences and similarities of European languages on a map.">
+  <meta name="twitter:image:src" content="http://translationmap.cf/translation-map.pngs">
   <!-- END Twitter Card -->
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="lib/jvectormap-2.0.1/jquery-jvectormap-2.0.1.css" type="text/css" media="screen"/>
@@ -35,7 +35,20 @@
       <div>Don't worry, there's nothing malicious here, check the source code on <a href="https://github.com/chrisma/translation-map">Github</a>.</div><br>
     </noscript>
     <input id="translation" type="text" autofocus placeholder="Word to translate">
-    <div id="examples">Examples: <a href="javascript:updateHashValue('text','cinema');void 0;">cinema</a>, <a href="javascript:updateHashValue('text','butterfly');void 0;">butterfly</a>, <a href="javascript:updateHashValue('text','tv');void 0;">tv</a></div>
+    <div id="examples">
+      <strong>Examples:</strong>
+      <div id="example-btn" class="expanded"></div>
+      <ul id="example-content">
+        <li><a href="javascript:updateHashValue('text','cinema');void 0;">cinema</a></li>
+        <li><a href="javascript:updateHashValue('text','butterfly');void 0;">butterfly</a></li>
+        <li><a href="javascript:updateHashValue('text','television');void 0;">television</a></li>
+        <li><a href="javascript:updateHashValue('text','football');void 0;">football</a></li>
+        <li><a href="javascript:updateHashValue('text','cat');void 0;">cat</a></li>
+        <li><a href="javascript:updateHashValue('text','potato');void 0;">potato</a></li>
+        <li><a href="javascript:updateHashValue('text','airplane');void 0;">airplane</a></li>
+        <li><a href="javascript:updateHashValue('text','turtle');void 0;">turtle</a></li>
+      </ul>
+    </div>
     <div id="loader_container">
       <img id="loadergif" class="hidden" src="loader.gif">
       <div id="loader"></div>
@@ -94,7 +107,7 @@
       'ES': [-15,-20],
       'DK': [-32,0],
       'IT': [0,-10],
-      'LV': [7,-4],
+      'LV': [7,3],
       'AT': [15,0],
       'DE': [0,-10],
       'UA': [0,-20],
@@ -109,7 +122,7 @@
       'GB': [23,60],
       'LT': [0,-5],
       'SK': [0,-3],
-      'NL': [0,-8]
+      'NL': [5,0]
     }
 
     var mapParams = {
@@ -224,11 +237,10 @@
       $(this).attr("href", $('#hidden-canvas')[0].toDataURL("image/png"));
     }
 
-    var map;
     $(document).ready(function(){
       //Setup
       var $map = $('#map');
-      map = new jvm.Map(mapParams);
+      var map = new jvm.Map(mapParams);
 
       function adaptToWindow() {
         $map.height($(window).height());
@@ -247,6 +259,15 @@
       $("#download-svg").on("click", downloadSVG);
       $("#download-png").on("click", downloadPNG);
 
+      var expanded = true;
+      $('#example-btn').on('click', function() {
+          $('#example-content').slideToggle(200);
+          $(this).removeClass();
+          if(expanded) $(this).addClass('collapsed');
+          else $(this).addClass('expanded');
+          expanded = !expanded;
+      });
+
       $(window).on('hashchange',function(){
         var text = getHashValue('text');
         $('#translation').val(text);
@@ -254,7 +275,7 @@
       });
 
       var hashText = getHashValue('text');
-      var choices = ['butterfly', 'tv', 'computer', 'cinema', 'mosquito'];
+      var choices = ['dog', 'surprise', 'computer', 'cinema', 'mosquito'];
       var randomWord = choices[Math.floor(Math.random()*choices.length)];
       var text = hashText || randomWord;
       $('#translation').val(text);
