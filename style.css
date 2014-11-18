@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  font-family: Open Sans, sans-serif;
+}
+input[type="text"] {
+  position:absolute;
+  top: 24px;
+  left: 80px;
+  font-size: 16px;
+  box-shadow: 1px 2px 2px 1px #303030;
+  padding: 5px;
+  border: none;
+  width: 191px;
+}
+input[type="text"]:focus {
+  outline: 0; /*diable blue outline on focus*/
+}
+div#loader_container {
+  position: absolute;
+  top: 26px;
+  left: 287px;
+  font-size: 12px;
+}
+div#loader_container img {
+  height: 9px;
+  margin-left: 2px;
+}
+.hidden {
+  display: none;
+}
+div#examples {
+  top: 59px;
+  left: 80px;
+  position: absolute;
+  font-size: 12px;
+  font-weight: bold;
+}
+a:link {
+  color: #333333;
+}
+a:visited {
+  color: #333333;
+}
+footer {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  font-size: 15px;
+}
