@@ -3,9 +3,6 @@
   font-family: Open Sans, sans-serif;
 }
 input[type="text"] {
-  position:absolute;
-  top: 24px;
-  left: 80px;
   font-size: 16px;
   box-shadow: 1px 2px 2px 1px #303030;
   padding: 5px;
@@ -13,13 +10,25 @@ input[type="text"] {
   width: 191px;
 }
 input[type="text"]:focus {
-  outline: 0; /*diable blue outline on focus*/
+  outline: 0; /*disable blue outline on focus*/
+}
+div#inputs{
+  position:absolute;
+  top: 24px;
+  left: 80px;
+}
+div#examples {
+  margin-top: 7px;
+  margin-left: 2px;
+  font-size: 12px;
+  font-weight: bold;
 }
 div#loader_container {
   position: absolute;
-  top: 26px;
-  left: 287px;
-  font-size: 12px;
+  top: -2px;
+  left: 210px;
+  font-size: 14px;
+  width: 200px;
 }
 div#loader_container img {
   height: 9px;
@@ -27,13 +36,6 @@ div#loader_container img {
 }
 .hidden {
   display: none;
-}
-div#examples {
-  top: 59px;
-  left: 80px;
-  position: absolute;
-  font-size: 12px;
-  font-weight: bold;
 }
 a:link {
   color: #333333;

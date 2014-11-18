@@ -13,11 +13,13 @@
 </head>
 <body>
   <div id="map" style="width:100%; height: 900px;"></div>
-  <input id="translation" type="text" autofocus placeholder="Word to translate">
-  <div id="examples">Examples: <a href="#cinema">cinema</a>, <a href="#butterfly">butterfly</a>, <a href="#tv">tv</a></div>
-  <div id="loader_container">
-    <img id="loadergif" class="hidden" src="loader.gif">
-    <div id="loader"></div>
+  <div id="inputs">
+    <input id="translation" type="text" autofocus placeholder="Word to translate">
+    <div id="examples">Examples: <a href="#cinema">cinema</a>, <a href="#butterfly">butterfly</a>, <a href="#tv">tv</a></div>
+    <div id="loader_container">
+      <img id="loadergif" class="hidden" src="loader.gif">
+      <div id="loader"></div>
+    </div>
   </div>
   <canvas id="hidden-canvas" style="display:none"></canvas>
   <footer>By <a href="https://twitter.com/chrisma0">@chrisma0</a> | Hosted on <a href="https://github.com/chrisma/translation-map">Github</a> | Download current view: <a href="javascript:;" id="download-svg" download="translation-map.svg">SVG</a>, <a href="javascript:;" id="download-png" download="translation-map.png">PNG</a></footer>
