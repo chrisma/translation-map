@@ -1,5 +1,7 @@
 * {
   margin: 0;
+}
+div, footer, input {
   font-family: Open Sans, sans-serif;
 }
 input[type="text"] {
